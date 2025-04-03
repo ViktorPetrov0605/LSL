@@ -4,7 +4,7 @@ import subprocess
 import sys
 import os
 import lsl  # Adjust the import if needed (e.g., `import .lsl` for Python 3.3+)
-
+#main tests
 class TestLSL(unittest.TestCase):
     @patch("builtins.open", new_callable=mock_open, read_data="alpine = alpine:latest\nnginx = nginx:stable")
     def test_load_config(self, mock_file):
