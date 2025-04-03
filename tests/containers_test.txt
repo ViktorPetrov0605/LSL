@@ -1,0 +1,2 @@
+test_image = alpine:3.18
+invalid_line = no_tag
