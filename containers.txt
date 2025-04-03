@@ -1,0 +1,7 @@
+# Example format: container_name = docker_repository:tag
+# Uncomment or add entries below:
+
+alpine = alpine:latest
+nginx = nginx:stable
+ubuntu = ubuntu:22.04
+# myapp = yourusername/yourimage:version
