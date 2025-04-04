@@ -7,6 +7,7 @@ Hey! I'm Viktor Petrov, a student at Fontys University, currently working on thi
 ## Project Goals
 
 **What I want to achieve:**
+
 - Develop an efficient Docker-based solution for managing development environments.
 - Provide near-instant initialization of environments.
 - Reduce resource usage compared to traditional virtual machines (VMs).
@@ -14,6 +15,7 @@ Hey! I'm Viktor Petrov, a student at Fontys University, currently working on thi
 - Streamline workflows for developers and system administrators.
 
 **Why this project:**
+
 Current solutions often involve heavy VMs or complex container setups that are time-consuming and resource-intensive. LSL aims to address these pain points by offering a developer-friendly platform.
 
 ## Implementation Plan
@@ -21,21 +23,19 @@ Current solutions often involve heavy VMs or complex container setups that are t
 Given the feedback received, I've broken down the project into smaller, manageable steps:
 
 1. **Core Functionality (CLI):**
- - [x] Environment initialization (`lsl init`).
- - [x] Container creation, listing, start/stop (`lsl create`, `lsl list`, `lsl start/stop`).
-
+   - [x] Environment initialization (`lsl init`).
+   - [x] Container creation, listing, start/stop (`lsl create`, `lsl list`, `lsl start/stop`).
 2. **Terminal User Interface (TUI):**
- - [ ] Design and implement an intuitive TUI for enhanced user experience.
-
+   - [ ] Design and implement an intuitive TUI for enhanced user experience.
 3. **Collaboration Features:**
- - [ ] Environment sharing and file synchronization.
- - [ ] Access control mechanisms.
-
+   - [ ] Environment sharing and file synchronization.
+   - [ ] Access control mechanisms.
 4. **Additional Enhanecements:**
- - [ ] Container orchestration using Docker.
- - [ ] Secure authentication and efficient resource management.
+   - [ ] Container orchestration using Docker.
+   - [ ] Secure authentication and efficient resource management.
 
 ## Realistic End Goal:
+
 The primary objective is to create a functional and user-friendly container management system that significantly improves the development workflow, especially in collaborative environments. By focusing on efficiency, speed, and ease of use, LSL will be a valuable tool for developers working on various projects.
 
 ## Feedback and Contribution
@@ -46,10 +46,12 @@ As this project evolves, I welcome feedback and suggestions! If you have ideas o
 
 Comprehensive documentation for LSL is available in the `docs/` directory:
 
-* **`docs/usage.md`**: Detailed instructions on how to use the LSL command-line interface, including examples for common tasks.
-* **`docs/configuration.md`**: Information on configuring available containers and customizing LSL's behavior.
+* `docs/usage.md`: Detailed instructions on how to use the LSL command-line interface, including examples for common tasks.
+* `docs/configuration.md`: Information on configuring available containers and customizing LSL's behavior.
 
 ## Getting Started
 
 To begin using LSL, ensure you have Docker installed. Then, clone this repository and explore the documentation. You can list available containers using:
-
+```bash
+lsl -l
+```
