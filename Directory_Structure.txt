@@ -2,7 +2,10 @@ your-project/
 ├── containers.txt
 ├── lsl.py
 ├── README.md
-└── tests/
-    ├── test_lsl.py
-    ├── conftest.py
-    └── containers_test.txt
+├── tests/
+├   ├── test_lsl.py
+├   ├── conftest.py
+├   └── containers_test.txt
+└── docs/
+    ├── usage.md
+    └── configuration.md
