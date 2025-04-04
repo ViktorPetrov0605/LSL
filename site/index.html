@@ -1,95 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>LSL</title>
-   <style>
-       body {
-           font-family: 'Arial', sans-serif;
-           margin: 0;
-           padding: 0;
-           background-color: #f4f4f4;
-           color: #333;
-       }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LSL</title>
+  <style>
+      body {
+          font-family: 'Arial', sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #f4f4f4;
+          color: #333;
+      }
 
-       header {
-           background-color: #3498db;
-           color: #fff;
-           padding: 20px 0;
-           text-align: center;
-       }
+      header {
+          background-color: #3498db;
+          color: #fff;
+          padding: 20px 0;
+          text-align: center;
+      }
 
-       nav {
-           background-color: #2c3e50;
-           color: #fff;
-           padding: 10px 0;
-           text-align: center;
-       }
+      nav {
+          background-color: #2c3e50;
+          color: #fff;
+          padding: 10px 0;
+          text-align: center;
+      }
 
-       nav a {
-           color: #fff;
-           text-decoration: none;
-           padding: 10px 20px;
-           display: inline-block;
-       }
+      nav a {
+          color: #fff;
+          text-decoration: none;
+          padding: 10px 20px;
+          display: inline-block;
+      }
 
-       section {
-           padding: 20px;
-           margin: 20px;
-           background-color: #fff;
-           border-radius: 8px;
-           box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-       }
+      section {
+          padding: 20px;
+          margin: 20px;
+          background-color: #fff;
+          border-radius: 8px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
 
-       footer {
-           background-color: #2c3e50;
-           color: #fff;
-           text-align: center;
-           padding: 10px 0;
-           position: fixed;
-           bottom: 0;
-           width: 100%;
-       }
+      h2 {
+          color: #3498db;
+          border-bottom: 2px solid #3498db;
+          padding-bottom: 10px;
+      }
 
-       .github-link {
-           color: #fff;
-           text-decoration: none;
-           font-weight: bold;
-       }
-   </style>
+      #overview p {
+          line-height: 1.6;
+      }
+
+      /* Basic animation example */
+      @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+      }
+
+      section {
+          animation: fadeIn 1s ease-in-out;
+      }
+
+      footer {
+          background-color: #2c3e50;
+          color: #fff;
+          text-align: center;
+          padding: 10px 0;
+          position: fixed;
+          bottom: 0;
+          width: 100%;
+      }
+
+      .github-link {
+          color: #fff;
+          text-decoration: none;
+          font-weight: bold;
+      }
+  </style>
 </head>
 <body>
 
-   <header>
-       <h1>LSL - Lightweight Subsystem for Linux</h1>
-       <p>A CLI for managing lightweight Docker containers.</p>
-   </header>
+  <header>
+      <h1>LSL - Lightweight Subsystem for Linux</h1>
+      <p>A CLI for managing lightweight Docker containers.</p>
+  </header>
 
-   <nav>
-       <a href="#">Overview</a>
-       <a href="#">Usage</a>
-       <a href="#">Configuration</a>
-   </nav>
+  <nav>
+      <a href="#">Overview</a>
+      <a href="#">Usage</a>
+      <a href="#">Configuration</a>
+  </nav>
 
-   <section>
-       <h2>Overview</h2>
-       <p>LSL aims to streamline the management of virtualized Linux-based development environments, making it easier and faster for software engineers, system administrators, and DevOps teams to create, manage, and share their development setups.</p>
-   </section>
+  <section id="overview">
+      <h2>Overview</h2>
+      <p>LSL is a CLI tool for managing lightweight Docker containers, streamlining development environments.</p>
+  </section>
 
-   <section>
-       <h2>Key Features</h2>
-       <ul>
-           <li>Easy container creation and management</li>
-           <li>Simple configuration via <code>containers.txt</code></li>
-           <li>Host network and data persistence options</li>
-       </ul>
-   </section>
+  <section id="usage">
+      <h2>Usage</h2>
+      <div id="usage-content">
+          <!-- Content from docs/usage.md will be inserted here -->
+      </div>
+  </section>
 
-   <footer>
-       <p>Created with ❤️ by Viktor Petrov</p>
-       <a href="https://github.com/ViktorPetrov0605/LSL" class="github-link">GitHub Repository</a>
-   </footer>
+  <section id="configuration">
+      <h2>Configuration</h2>
+      <div id="configuration-content">
+          <!-- Content from docs/configuration.md will be inserted here -->
+      </div>
+  </section>
+
+  <section id="license">
+      <h2>License</h2>
+      <div id="license-content">
+          <!-- Content from LICENSE will be inserted here -->
+      </div>
+  </section>
+
+  <footer>
+      <p>Created with ❤️ by Viktor Petrov</p>
+      <a href="https://github.com/ViktorPetrov0605/LSL" class="github-link">GitHub Repository</a>
+  </footer>
+
+  <script>
+      async function fetchDocumentation() {
+          try {
+              const usageResponse = await fetch('docs/usage.md');
+              const usageText = await usageResponse.text();
+              document.getElementById('usage-content').innerHTML = usageText;
+
+              const configurationResponse = await fetch('docs/configuration.md');
+              const configurationText = await configurationResponse.text();
+              document.getElementById('configuration-content').innerHTML = configurationText;
+
+              const licenseResponse = await fetch('LICENSE');
+              const licenseText = await licenseResponse.text();
+              document.getElementById('license-content').innerHTML = licenseText;
+
+          } catch (error) {
+              console.error('Error fetching documentation:', error);
+              document.getElementById('usage-content').innerHTML = '<p>Error loading documentation.</p>';
+              document.getElementById('configuration-content').innerHTML = '<p>Error loading documentation.</p>';
+              document.getElementById('license-content').innerHTML = '<p>Error loading documentation.</p>';
+          }
+      }
+
+      window.onload = fetchDocumentation;
+  </script>
 
 </body>
 </html>
