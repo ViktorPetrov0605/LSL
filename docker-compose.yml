@@ -3,6 +3,6 @@ services:
   web:
     build: .  # Build the image from the Dockerfile in the current directory
     ports:
-      - "8080:8080"
+      - "8181:8181"
     volumes:
       - .:/site  # Mount the current directory (where the Dockerfile is) into the /app directory in the container
