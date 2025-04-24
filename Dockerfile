@@ -1,4 +1,4 @@
-FROM python:3.9-slim-buster  # Use a lightweight Python base image
+FROM python:3.9-slim-buster
 
 WORKDIR /site
 
