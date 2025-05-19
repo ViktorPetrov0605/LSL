@@ -74,3 +74,12 @@ To begin using LSL, ensure you have Docker installed. Then, clone this repositor
 ```bash
 lsl -l
 ```
+You can also start up this project's website with a lot more nicely-formatted information. You can run 
+```bash
+docker-compose build
+```
+then 
+```bash
+docker-compose up -d
+```
+In case of issues, assure that both ```docker-compose``` and ```build``` are installed. 
