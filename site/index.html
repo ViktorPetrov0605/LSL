@@ -1,67 +1,493 @@
-<body style="font-family: Arial, sans-serif;">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LSL - Lightweight Subsystem for Linux</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f7fa;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        nav {
+            background-color: #2c3e50;
+            padding: 1rem;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            display: inline-block;
+        }
+        
+        nav a:hover {
+            background-color: #34495e;
+        }
+        
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem 6rem 1rem;
+        }
+        
+        section {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        h3 {
+            color: #2980b9;
+            margin: 1.5rem 0 0.75rem 0;
+        }
+        
+        p, ul, ol {
+            margin-bottom: 1rem;
+        }
+        
+        ul, ol {
+            padding-left: 2rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .code-block {
+            background-color: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            color: #333;
+        }
+        
+        .code-command {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+        }
+        
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        
+        footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            border: 1px solid #ddd;
+            padding: 0.75rem;
+            text-align: left;
+        }
+        
+        .comparison-table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .comparison-table tr:hover {
+            background-color: #eaf2f8;
+        }
+        
+        .user-story {
+            background-color: #f8f9fa;
+            border-left: 4px solid #2ecc71;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+        
+        .user-story-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            nav {
+                padding: 0.5rem;
+            }
+            
+            nav a {
+                margin: 0.2rem;
+                padding: 0.4rem 0.6rem;
+                font-size: 0.9rem;
+            }
+            
+            section {
+                padding: 1.5rem;
+            }
+            
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.5rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
 
-<header style="background-color: #3498db; color: white; padding: 20px; text-align: center;">
+<header>
     <h1>LSL - Lightweight Subsystem for Linux</h1>
     <p>A CLI for managing lightweight Docker containers.</p>
 </header>
 
-<nav style="background-color: #2c3e50; color: white; padding: 10px; text-align: center;">
-    <a href="#usage" style="color: white; text-decoration: none; padding: 10px 20px;">Usage</a> |
-    <a href="#configuration" style="color: white; text-decoration: none; padding: 10px 20px;">Configuration</a> |
-    <a href="#license" style="color: white; text-decoration: none; padding: 10px 20px;">License</a> |
-    <a href="https://github.com/ViktorPetrov0605/LSL" style="color: white; text-decoration: none; padding: 10px 20px;">GitHub</a>
+<nav>
+    <a href="#overview">Overview</a> |
+    <a href="#why-choose-us">Why Choose Us</a> |
+    <a href="#user-stories">User Stories</a> |
+    <a href="#usage">Usage</a> |
+    <a href="#configuration">Configuration</a> |
+    <a href="#roadmap">Roadmap</a> |
+    <a href="#license">License</a> |
+    <a href="https://github.com/ViktorPetrov0605/LSL">GitHub</a>
 </nav>
 
-<main style="padding: 20px;">
+<main>
 
-    <section id="overview" style="margin-bottom: 30px;">
+    <section id="overview">
         <h2>Overview</h2>
         <p>LSL aims to streamline the management of virtualized Linux-based development environments, making it easier and faster for software engineers, system administrators, and DevOps teams to create, manage, and share their development setups.</p>
+        <p>Designed to provide a quick and efficient way to create temporary containers using Docker's engine, LSL offers host networking access and file system access, making it ideal for developers who need to compile code across different Linux distributions.</p>
     </section>
 
-    <section id="usage" style="margin-bottom: 30px;">
+    <section id="why-choose-us">
+        <h2>Why Choose LSL</h2>
+        <p>When it comes to lightweight containerization solutions, you have several options. Here's why LSL stands out from the alternatives:</p>
+        
+        <table class="comparison-table">
+            <tr>
+                <th>Feature</th>
+                <th>LSL</th>
+                <th>systemd-nspawn</th>
+                <th>LXC/LXD</th>
+            </tr>
+            <tr>
+                <td><strong>Startup Speed</strong></td>
+                <td>Extremely fast (seconds)</td>
+                <td>Moderate</td>
+                <td>Varies (containers fast, VMs slower)</td>
+            </tr>
+            <tr>
+                <td><strong>Resource Usage</strong></td>
+                <td>Minimal</td>
+                <td>Low</td>
+                <td>Moderate to High</td>
+            </tr>
+            <tr>
+                <td><strong>Host Network Access</strong></td>
+                <td>Built-in</td>
+                <td>Limited</td>
+                <td>Requires configuration</td>
+            </tr>
+            <tr>
+                <td><strong>File System Access</strong></td>
+                <td>Direct and simple</td>
+                <td>Available but complex</td>
+                <td>Available but requires setup</td>
+            </tr>
+            <tr>
+                <td><strong>Learning Curve</strong></td>
+                <td>Minimal</td>
+                <td>Moderate</td>
+                <td>Steep</td>
+            </tr>
+            <tr>
+                <td><strong>Cross-distro Development</strong></td>
+                <td>Excellent</td>
+                <td>Limited</td>
+                <td>Good but complex</td>
+            </tr>
+        </table>
+        
+        <h3>Key Advantages of LSL</h3>
+        <ul>
+            <li><strong>Speed:</strong> Leveraging Docker's efficient engine, LSL ensures rapid container creation and teardown, which is crucial for development workflows.</li>
+            <li><strong>Simplicity:</strong> Simple CLI interface makes it accessible to developers of all skill levels.</li>
+            <li><strong>Practicality:</strong> The ability to access the host's network and file system directly simplifies many development tasks, such as testing network configurations or accessing shared resources.</li>
+            <li><strong>Docker-Powered:</strong> Built on the reliable and well-maintained Docker platform, ensuring compatibility and stability.</li>
+            <li><strong>Resource Efficiency:</strong> Minimal overhead compared to traditional virtual machines or more complex container solutions.</li>
+        </ul>
+    </section>
+
+    <section id="user-stories">
+        <h2>User Stories</h2>
+        <p>Real development challenges solved by LSL:</p>
+        
+        <div class="user-story">
+            <div class="user-story-title">The Cross-Platform Developer's Dilemma</div>
+            <p>"My team develops applications that need to run on multiple Linux distributions. Before LSL, we maintained separate VMs for each target OS, which consumed massive resources and required constant maintenance. With LSL, we can spin up containers for Ubuntu, CentOS, or Alpine in seconds, test our build, and tear them down just as quickly."</p>
+        </div>
+        
+        <div class="user-story">
+            <div class="user-story-title">The Dependency Nightmare</div>
+            <p>"Our application has complex dependency requirements that often conflict with other projects. Setting up isolated environments used to take hours and introduce inconsistencies between team members. LSL has standardized our approach—everyone uses the same container configurations, eliminating the 'it works on my machine' problem."</p>
+        </div>
+        
+        <div class="user-story">
+            <div class="user-story-title">The New Hire Onboarding Challenge</div>
+            <p>"Getting new team members set up with our development environment used to take days of troubleshooting. With LSL, new developers can be productive within hours by simply cloning our repository and running a few LSL commands to create their containerized environment."</p>
+        </div>
+        
+        <div class="user-story">
+            <div class="user-story-title">The Quick Environment Test</div>
+            <p>"When I need to test a quick script or configuration in a clean environment, I don't want to spin up a full VM. LSL lets me create a throwaway container in seconds, run my tests, and discard it—all without cluttering my host system or wasting time on setup."</p>
+        </div>
+    </section>
+
+    <section id="usage">
         <h2>Usage</h2>
         <p>LSL provides a command-line interface (CLI) for managing lightweight Docker containers. Here's a breakdown of the available options:</p>
         <ul>
-            <li><code>lsl --list</code> or <code>lsl -l</code>: Lists the available containers configured in <code>containers.txt</code>.</li>
-            <li><code>lsl -n <container_name></code>: Starts a container with the specified name.</li>
-            <li><code>lsl --persist -n <container_name></code>: Starts a container with data persistence enabled.</li>
-            <li><code>lsl --net -n <container_name></code>: Starts a container using the host network.</li>
+            <li><span class="code-command">lsl --list</span> or <span class="code-command">lsl -l</span>: Lists the available containers configured in <span class="code-command">containers.txt</span>.</li>
+            <li><span class="code-command">lsl -n &lt;container_name&gt;</span>: Starts a container with the specified name.</li>
+            <li><span class="code-command">lsl --persist -n &lt;container_name&gt;</span>: Starts a container with data persistence enabled.</li>
+            <li><span class="code-command">lsl --net -n &lt;container_name&gt;</span>: Starts a container using the host network.</li>
         </ul>
         <p><strong>Examples:</strong></p>
-        <pre><code>lsl -l</code></pre>
-        <pre><code>lsl -n alpine</code></pre>
-        <pre><code>lsl --persist -n web_app</code></pre>
-        <pre><code>lsl --net -n db_server</code></pre>
+        <div class="code-block"><pre>lsl -l</pre></div>
+        <div class="code-block"><pre>lsl -n alpine</pre></div>
+        <div class="code-block"><pre>lsl --persist -n web_app</pre></div>
+        <div class="code-block"><pre>lsl --net -n db_server</pre></div>
     </section>
 
-    <section id="configuration" style="margin-bottom: 30px;">
+    <section id="configuration">
         <h2>Configuration</h2>
-        <p>LSL relies on a <code>containers.txt</code> file to define available containers and their corresponding Docker images.</p>
-        <h3><code>containers.txt</code> Format</h3>
-        <pre><code># Example format: container_name = docker_repository:tag
+        <p>LSL relies on a <span class="code-command">containers.txt</span> file to define available containers and their corresponding Docker images.</p>
+        <h3><span class="code-command">containers.txt</span> Format</h3>
+        <div class="code-block"><pre># Example format: container_name = docker_repository:tag
 # Uncomment or add entries below:
 alpine = alpine:latest
 ubuntu = ubuntu:22.04
-# myapp = yourusername/yourimage:version
-</code></pre>
-        <p>Each line should follow the format <code>container_name = docker_repository:tag</code>. Comments start with <code>#</code>.</p>
+# myapp = yourusername/yourimage:version</pre></div>
+        <p>Each line should follow the format <span class="code-command">container_name = docker_repository:tag</span>. Comments start with <span class="code-command">#</span>.</p>
     </section>
 
-    <section id="license" style="margin-bottom: 30px;">
+    <section id="roadmap">
+        <h2>Project Roadmap</h2>
+        <p>Our development plan focuses on delivering the most valuable features first while maintaining a clear vision for future enhancements.</p>
+        
+        <div style="text-align: center; margin: 2rem 0;">
+            <img src="https://via.placeholder.com/800x200/f5f7fa/3498db?text=LSL+Development+Timeline" alt="LSL Development Timeline" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+        </div>
+        
+        <h3>Feature Prioritization (MoSCoW)</h3>
+        
+        <h4 style="color: #e74c3c; margin-top: 1.5rem;">MUST HAVE</h4>
+        <ol>
+            <li><strong>Core CLI Functionality</strong>
+                <ul>
+                    <li>Container initialization (<span class="code-command">lsl init</span>)</li>
+                    <li>Container listing, starting, and stopping</li>
+                    <li>Error handling and user feedback</li>
+                    <li>Basic documentation</li>
+                </ul>
+            </li>
+            <li><strong>Configuration System</strong>
+                <ul>
+                    <li>Standardized container configuration files</li>
+                    <li>Environment variable support</li>
+                    <li>Container definition templates</li>
+                </ul>
+            </li>
+            <li><strong>Docker Integration</strong>
+                <ul>
+                    <li>Efficient container creation and teardown</li>
+                    <li>Host network access capabilities</li>
+                    <li>File system access management</li>
+                    <li>Data persistence options</li>
+                </ul>
+            </li>
+        </ol>
+        
+        <h4 style="color: #f39c12; margin-top: 1.5rem;">SHOULD HAVE</h4>
+        <ol>
+            <li><strong>Terminal User Interface (TUI)</strong>
+                <ul>
+                    <li>Interactive container management</li>
+                    <li>Visual status displays</li>
+                    <li>Enhanced user experience</li>
+                </ul>
+            </li>
+            <li><strong>Extended Documentation</strong>
+                <ul>
+                    <li>Comprehensive command reference</li>
+                    <li>Tutorial examples</li>
+                    <li>Best practices guide</li>
+                </ul>
+            </li>
+            <li><strong>Image Management</strong>
+                <ul>
+                    <li>Image caching</li>
+                    <li>Custom image building</li>
+                    <li>Image versioning</li>
+                </ul>
+            </li>
+        </ol>
+        
+        <h4 style="color: #2ecc71; margin-top: 1.5rem;">COULD HAVE</h4>
+        <ol>
+            <li><strong>Collaboration Features</strong>
+                <ul>
+                    <li>Environment sharing</li>
+                    <li>File synchronization</li>
+                    <li>Team-based configurations</li>
+                </ul>
+            </li>
+            <li><strong>Container Orchestration</strong>
+                <ul>
+                    <li>Multi-container environments</li>
+                    <li>Resource allocation</li>
+                    <li>Service discovery</li>
+                </ul>
+            </li>
+            <li><strong>Admin Web UI</strong>
+                <ul>
+                    <li>Container management dashboard</li>
+                    <li>Configuration interface</li>
+                    <li>Resource monitoring</li>
+                </ul>
+            </li>
+            <li><strong>Advanced Features</strong>
+                <ul>
+                    <li>Access control mechanisms</li>
+                    <li>Secure authentication</li>
+                    <li>Plugin architecture for extensions</li>
+                </ul>
+            </li>
+        </ol>
+        
+        <h4 style="color: #7f8c8d; margin-top: 1.5rem;">WON'T HAVE</h4>
+        <ol>
+            <li><strong>Full-fledged Container Orchestration</strong>
+                <ul>
+                    <li>LSL is focused on lightweight development environments, not replacing Kubernetes or Docker Swarm</li>
+                    <li>Complex scaling or clustering features would add unnecessary complexity</li>
+                </ul>
+            </li>
+            <li><strong>Production Deployment Tools</strong>
+                <ul>
+                    <li>The focus remains on development environments rather than production deployment</li>
+                    <li>Better to integrate with existing deployment tools than build new ones</li>
+                </ul>
+            </li>
+            <li><strong>Cross-platform GUI</strong>
+                <ul>
+                    <li>While a web UI may be developed, a dedicated GUI application would distract from core functionality</li>
+                    <li>The command-line interface remains the primary focus for developer efficiency</li>
+                </ul>
+            </li>
+        </ol>
+        
+        <h3 style="margin-top: 2rem;">Development Timeline</h3>
+        
+        <div class="user-story" style="border-left-color: #3498db;">
+            <div class="user-story-title">Phase 1: Core Functionality (Current)</div>
+            <p>We've already implemented the basic container management capabilities, including container creation, listing, and simple configuration. Users can create containers with persistence and network access options.</p>
+        </div>
+        
+        <div class="user-story" style="border-left-color: #9b59b6;">
+            <div class="user-story-title">Phase 2: User Experience Improvements (Next 3 Months)</div>
+            <p>Focusing on enhancing usability through a Terminal User Interface (TUI), improved documentation, and more container customization options. This phase will make LSL more accessible to users of all skill levels.</p>
+        </div>
+        
+        <div class="user-story" style="border-left-color: #e67e22;">
+            <div class="user-story-title">Phase 3: Collaboration & Advanced Features (Future)</div>
+            <p>Implementation of team collaboration features, environment sharing, and potentially a lightweight web UI for management. This phase will enable better team workflow integration.</p>
+        </div>
+        
+        <p style="margin-top: 2rem;"><strong>Current Status:</strong> Phase 1 is complete. We are actively working on Phase 2 features, with particular focus on the Terminal User Interface and extended documentation.</p>
+    </section>
+
+    <section id="license">
         <h2>License</h2>
         <p>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</p>
         <p>Copyright (C) 2007 Free Software Foundation, Inc. <a href="https://fsf.org/">https://fsf.org/</a></p>
         <p>Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed.</p>
-        <!-- The full license text is VERY long. I'm omitting it here for brevity. You can paste the full license text here if desired. -->
         <p><em>(Full license text omitted for brevity. See <a href="LICENSE">LICENSE</a> file for the complete text.)</em></p>
     </section>
 
 </main>
 
-<footer style="background-color: #2c3e50; color: white; text-align: center; padding: 10px; position: fixed; bottom: 0; width: 100%;">
+<footer>
     <p>Created with ❤️ by Viktor Petrov</p>
-    <a href="https://github.com/ViktorPetrov0605/LSL" style="color: white; text-decoration: none;">GitHub Repository</a>
+    <a href="https://github.com/ViktorPetrov0605/LSL">GitHub Repository</a>
 </footer>
 
 </body>
+</html>

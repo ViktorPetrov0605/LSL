@@ -21,7 +21,7 @@ class TestLSL(unittest.TestCase):
             "persist": False
         })
         with self.assertLogs() as log:
-            lsl.main()
+            lsl.main() 
             self.assertIn("alpine: alpine:latest", log.output[0])
 
     @patch("subprocess.run")
