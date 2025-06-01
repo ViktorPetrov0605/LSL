@@ -14,7 +14,7 @@ import tempfile
 import shutil
 from typing import Dict, Any, List, Optional
 
-from shared.schemas.validator import validate_yaml, load_and_validate_yaml_file
+from .schemas.validator import validate_yaml, load_and_validate_yaml_file
 
 def load_yaml_config(file_path: str, schema_name: str) -> Dict[str, Any]:
     """

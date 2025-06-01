@@ -14,8 +14,8 @@ import logging
 # Add the project root to the path
 sys.path.insert(0, os.path.abspath(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
-from server.api import app, setup_app, logger
-from server.web_admin import WebAdmin
+from .api import app, setup_app, logger
+from .web_admin import WebAdmin
 
 def main():
     """Start the LSL server."""

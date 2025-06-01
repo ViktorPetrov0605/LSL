@@ -16,6 +16,11 @@ import json
 from typing import Dict, Any, Optional, Tuple
 from pathlib import Path
 
+# Use absolute imports for better compatibility
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from shared.utils.uuid_hash import generate_uuid
 from shared.utils.yaml_logger import setup_logger
 

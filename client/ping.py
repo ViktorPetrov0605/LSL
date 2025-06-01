@@ -13,6 +13,11 @@ from typing import Optional
 
 import requests
 
+# Use absolute imports for better compatibility
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from client.config import get_client_config, ClientConfig
 from shared.utils.yaml_logger import setup_logger
 

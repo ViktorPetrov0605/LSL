@@ -1,0 +1,12 @@
+pyyaml
+jsonschema
+pytest
+pytest-mock
+fastapi
+uvicorn
+jinja2
+python-multipart
+bcrypt
+docker
+requests
+psutil

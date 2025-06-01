@@ -15,6 +15,11 @@ from typing import Dict, Any, Optional, List, Tuple
 import docker
 from docker.errors import APIError, ImageNotFound, NotFound
 
+# Use absolute imports for better compatibility
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from client.config import get_client_config, ClientConfig
 from client.sync import ConfigSyncManager
 from shared.utils.yaml_logger import setup_logger
