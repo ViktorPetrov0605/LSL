@@ -1,0 +1,97 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "User Config Override Schema",
+    "description": "Schema for user-specific config overrides",
+    "type": "object",
+    "properties": {
+        "allowed_containers": {
+            "type": "array",
+            "description": "List of container identifiers this user can access",
+            "items": {
+                "type": "string"
+            }
+        },
+        "resource_limits": {
+            "type": "object",
+            "description": "Resource limits for all user containers",
+            "properties": {
+                "max_containers": {
+                    "type": "integer",
+                    "description": "Maximum number of concurrent containers",
+                    "minimum": 0
+                },
+                "cpu": {
+                    "type": "string",
+                    "description": "CPU limit (e.g., '1.0', '500m')",
+                    "pattern": "^[0-9]+(\\.[0-9]+)?(m)?$"
+                },
+                "memory": {
+                    "type": "string",
+                    "description": "Memory limit (e.g., '1Gi', '512Mi')",
+                    "pattern": "^[0-9]+(Ki|Mi|Gi|Ti)?$"
+                }
+            },
+            "additionalProperties": false
+        },
+        "container_overrides": {
+            "type": "object",
+            "description": "Container-specific overrides",
+            "patternProperties": {
+                "^[a-zA-Z0-9_-]+$": {
+                    "type": "object",
+                    "properties": {
+                        "resources": {
+                            "type": "object",
+                            "description": "Resource limits for the specific container",
+                            "properties": {
+                                "cpu": {
+                                    "type": "string",
+                                    "description": "CPU limit (e.g., '1.0', '500m')",
+                                    "pattern": "^[0-9]+(\\.[0-9]+)?(m)?$"
+                                },
+                                "memory": {
+                                    "type": "string",
+                                    "description": "Memory limit (e.g., '1Gi', '512Mi')",
+                                    "pattern": "^[0-9]+(Ki|Mi|Gi|Ti)?$"
+                                }
+                            }
+                        },
+                        "env": {
+                            "type": "object",
+                            "description": "Environment variables for the container",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        },
+                        "volumes": {
+                            "type": "array",
+                            "description": "Volume mounts for the container",
+                            "items": {
+                                "type": "object",
+                                "required": ["host_path", "container_path"],
+                                "properties": {
+                                    "host_path": {
+                                        "type": "string",
+                                        "description": "Path on the host"
+                                    },
+                                    "container_path": {
+                                        "type": "string",
+                                        "description": "Path in the container"
+                                    },
+                                    "read_only": {
+                                        "type": "boolean",
+                                        "description": "Mount as read-only",
+                                        "default": false
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}

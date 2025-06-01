@@ -1,0 +1,330 @@
+---
+timestamp: '2025-06-01T22:37:40.731763'
+level: INFO
+message: Initializing LSL server
+logger: lsl_server
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-01T22:37:40.736697'
+level: CRITICAL
+message: "Failed to initialize server: Configuration file config/main.yaml failed\
+  \ validation: Additional properties are not allowed ('rate_limits' was unexpected)\n\
+  \nFailed validating 'additionalProperties' in schema['properties']['server']:\n\
+  \    {'type': 'object',\n     'required': ['host', 'port'],\n     'properties':\
+  \ {'host': {'type': 'string',\n                             'description': 'Host\
+  \ to bind the server to',\n                             'default': '0.0.0.0'},\n\
+  \                    'port': {'type': 'integer',\n                             'description':\
+  \ 'Port to bind the server to',\n                             'minimum': 1,\n  \
+  \                           'maximum': 65535,\n                             'default':\
+  \ 8080},\n                    'https': {'type': 'object',\n                    \
+  \          'description': 'HTTPS configuration '\n                             \
+  \                '(optional)',\n                              'required': ['enabled'],\n\
+  \                              'properties': {'enabled': {'type': 'boolean',\n \
+  \                                                        'description': 'Whether\
+  \ '\n                                                                        'to\
+  \ '\n                                                                        'enable\
+  \ '\n                                                                        'HTTPS'},\n\
+  \                                             'cert_file': {'type': 'string',\n\
+  \                                                           'description': 'Path\
+  \ '\n                                                                          'to\
+  \ '\n                                                                          'SSL\
+  \ '\n                                                                          'certificate\
+  \ '\n                                                                          'file'},\n\
+  \                                             'key_file': {'type': 'string',\n \
+  \                                                         'description': 'Path '\n\
+  \                                                                         'to '\n\
+  \                                                                         'SSL '\n\
+  \                                                                         'private\
+  \ '\n                                                                         'key\
+  \ '\n                                                                         'file'}},\n\
+  \                              'additionalProperties': False,\n                \
+  \              'if': {'properties': {'enabled': {'const': True}}},\n           \
+  \                   'then': {'required': ['cert_file',\n                       \
+  \                             'key_file']}},\n                    'workers': {'type':\
+  \ 'integer',\n                                'description': 'Number of worker processes',\n\
+  \                                'minimum': 1,\n                               \
+  \ 'default': 1},\n                    'rate_limit': {'type': 'object',\n       \
+  \                            'description': 'Rate limiting '\n                 \
+  \                                 'configuration',\n                           \
+  \        'properties': {'enabled': {'type': 'boolean',\n                       \
+  \                                       'description': 'Whether '\n            \
+  \                                                                 'to '\n      \
+  \                                                                       'enable\
+  \ '\n                                                                          \
+  \   'rate '\n                                                                  \
+  \           'limiting',\n                                                      \
+  \        'default': True},\n                                                  'requests_per_minute':\
+  \ {'type': 'integer',\n                                                        \
+  \                  'description': 'Maximum '\n                                 \
+  \                                                        'requests '\n         \
+  \                                                                              \
+  \  'per '\n                                                                    \
+  \                     'minute '\n                                              \
+  \                                           'per '\n                           \
+  \                                                              'client',\n     \
+  \                                                                     'minimum':\
+  \ 1,\n                                                                         \
+  \ 'default': 60}},\n                                   'additionalProperties': False}},\n\
+  \     'additionalProperties': False}\n\nOn instance['server']:\n    {'host': '127.0.0.1',\n\
+  \     'port': 8000,\n     'rate_limits': {'get_config': 60, 'ping': 120, 'monitor':\
+  \ 30}}"
+logger: lsl_server
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-01T22:37:40.744097'
+level: CRITICAL
+message: "Failed to start server: Configuration file config/main.yaml failed validation:\
+  \ Additional properties are not allowed ('rate_limits' was unexpected)\n\nFailed\
+  \ validating 'additionalProperties' in schema['properties']['server']:\n    {'type':\
+  \ 'object',\n     'required': ['host', 'port'],\n     'properties': {'host': {'type':\
+  \ 'string',\n                             'description': 'Host to bind the server\
+  \ to',\n                             'default': '0.0.0.0'},\n                  \
+  \  'port': {'type': 'integer',\n                             'description': 'Port\
+  \ to bind the server to',\n                             'minimum': 1,\n        \
+  \                     'maximum': 65535,\n                             'default':\
+  \ 8080},\n                    'https': {'type': 'object',\n                    \
+  \          'description': 'HTTPS configuration '\n                             \
+  \                '(optional)',\n                              'required': ['enabled'],\n\
+  \                              'properties': {'enabled': {'type': 'boolean',\n \
+  \                                                        'description': 'Whether\
+  \ '\n                                                                        'to\
+  \ '\n                                                                        'enable\
+  \ '\n                                                                        'HTTPS'},\n\
+  \                                             'cert_file': {'type': 'string',\n\
+  \                                                           'description': 'Path\
+  \ '\n                                                                          'to\
+  \ '\n                                                                          'SSL\
+  \ '\n                                                                          'certificate\
+  \ '\n                                                                          'file'},\n\
+  \                                             'key_file': {'type': 'string',\n \
+  \                                                         'description': 'Path '\n\
+  \                                                                         'to '\n\
+  \                                                                         'SSL '\n\
+  \                                                                         'private\
+  \ '\n                                                                         'key\
+  \ '\n                                                                         'file'}},\n\
+  \                              'additionalProperties': False,\n                \
+  \              'if': {'properties': {'enabled': {'const': True}}},\n           \
+  \                   'then': {'required': ['cert_file',\n                       \
+  \                             'key_file']}},\n                    'workers': {'type':\
+  \ 'integer',\n                                'description': 'Number of worker processes',\n\
+  \                                'minimum': 1,\n                               \
+  \ 'default': 1},\n                    'rate_limit': {'type': 'object',\n       \
+  \                            'description': 'Rate limiting '\n                 \
+  \                                 'configuration',\n                           \
+  \        'properties': {'enabled': {'type': 'boolean',\n                       \
+  \                                       'description': 'Whether '\n            \
+  \                                                                 'to '\n      \
+  \                                                                       'enable\
+  \ '\n                                                                          \
+  \   'rate '\n                                                                  \
+  \           'limiting',\n                                                      \
+  \        'default': True},\n                                                  'requests_per_minute':\
+  \ {'type': 'integer',\n                                                        \
+  \                  'description': 'Maximum '\n                                 \
+  \                                                        'requests '\n         \
+  \                                                                              \
+  \  'per '\n                                                                    \
+  \                     'minute '\n                                              \
+  \                                           'per '\n                           \
+  \                                                              'client',\n     \
+  \                                                                     'minimum':\
+  \ 1,\n                                                                         \
+  \ 'default': 60}},\n                                   'additionalProperties': False}},\n\
+  \     'additionalProperties': False}\n\nOn instance['server']:\n    {'host': '127.0.0.1',\n\
+  \     'port': 8000,\n     'rate_limits': {'get_config': 60, 'ping': 120, 'monitor':\
+  \ 30}}"
+logger: lsl_server
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-01T22:39:13.678644'
+level: INFO
+message: Initializing LSL server
+logger: lsl_server
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-01T22:39:13.683198'
+level: CRITICAL
+message: "Failed to initialize server: Configuration file config/main.yaml failed\
+  \ validation: 'info' is not one of ['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL']\n\
+  \nFailed validating 'enum' in schema['properties']['logging']['properties']['level']:\n\
+  \    {'type': 'string',\n     'description': 'Logging level',\n     'enum': ['DEBUG',\
+  \ 'INFO', 'WARNING', 'ERROR', 'CRITICAL'],\n     'default': 'INFO'}\n\nOn instance['logging']['level']:\n\
+  \    'info'"
+logger: lsl_server
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-01T22:39:13.684436'
+level: CRITICAL
+message: "Failed to start server: Configuration file config/main.yaml failed validation:\
+  \ 'info' is not one of ['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL']\n\nFailed\
+  \ validating 'enum' in schema['properties']['logging']['properties']['level']:\n\
+  \    {'type': 'string',\n     'description': 'Logging level',\n     'enum': ['DEBUG',\
+  \ 'INFO', 'WARNING', 'ERROR', 'CRITICAL'],\n     'default': 'INFO'}\n\nOn instance['logging']['level']:\n\
+  \    'info'"
+logger: lsl_server
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-01T22:40:36.566763'
+level: INFO
+message: Initializing LSL server
+logger: lsl_server
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-01T22:40:36.577159'
+level: INFO
+message: Server configuration loaded successfully
+logger: lsl_server
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-01T22:40:36.577890'
+level: INFO
+message: Starting LSL server on 127.0.0.1:8000
+logger: lsl_server
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-01T22:40:36.598164'
+level: INFO
+message: Initializing LSL server
+logger: lsl_server
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-01T22:40:36.607201'
+level: INFO
+message: Server configuration loaded successfully
+logger: lsl_server
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-01T22:40:36.607896'
+level: INFO
+message: LSL server started
+logger: lsl_server
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-01T22:41:04.635243'
+level: DEBUG
+message: Ping from user1 (11111111-1111-4111-a111-111111111111)
+logger: lsl_server
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-01T22:41:24.517051'
+level: INFO
+message: Config requested by user1 (11111111-1111-4111-a111-111111111111)
+logger: lsl_server
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-01T22:41:36.625592'
+level: INFO
+message: Config requested by user2 (22222222-2222-4222-a222-222222222222)
+logger: lsl_server
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-01T22:41:49.966727'
+level: DEBUG
+message: Monitor data requested
+logger: lsl_server
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-01T22:42:01.687853'
+level: WARNING
+message: 'Invalid UUID format in token: invalid-uuid'
+logger: lsl_server
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-01T22:43:59.163680'
+level: DEBUG
+message: Ping from user1 (11111111-1111-4111-a111-111111111111)
+logger: lsl_server
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-01T22:43:59.167089'
+level: INFO
+message: Config requested by user1 (11111111-1111-4111-a111-111111111111)
+logger: lsl_server
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-01T22:43:59.290302'
+level: DEBUG
+message: Monitor data requested
+logger: lsl_server
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+

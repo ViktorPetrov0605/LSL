@@ -1,0 +1,152 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Main Configuration Schema",
+    "description": "Schema for global server settings in main.yaml",
+    "type": "object",
+    "required": ["server", "admin"],
+    "properties": {
+        "server": {
+            "type": "object",
+            "required": ["host", "port"],
+            "properties": {
+                "host": {
+                    "type": "string",
+                    "description": "Host to bind the server to",
+                    "default": "0.0.0.0"
+                },
+                "port": {
+                    "type": "integer",
+                    "description": "Port to bind the server to",
+                    "minimum": 1,
+                    "maximum": 65535,
+                    "default": 8080
+                },
+                "https": {
+                    "type": "object",
+                    "description": "HTTPS configuration (optional)",
+                    "required": ["enabled"],
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean",
+                            "description": "Whether to enable HTTPS"
+                        },
+                        "cert_file": {
+                            "type": "string",
+                            "description": "Path to SSL certificate file"
+                        },
+                        "key_file": {
+                            "type": "string",
+                            "description": "Path to SSL private key file"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "if": {
+                        "properties": {
+                            "enabled": { "const": true }
+                        }
+                    },
+                    "then": {
+                        "required": ["cert_file", "key_file"]
+                    }
+                },
+                "workers": {
+                    "type": "integer",
+                    "description": "Number of worker processes",
+                    "minimum": 1,
+                    "default": 1
+                },
+                "rate_limit": {
+                    "type": "object",
+                    "description": "Rate limiting configuration",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean",
+                            "description": "Whether to enable rate limiting",
+                            "default": true
+                        },
+                        "requests_per_minute": {
+                            "type": "integer",
+                            "description": "Maximum requests per minute per client",
+                            "minimum": 1,
+                            "default": 60
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "rate_limits": {
+                    "type": "object",
+                    "description": "Per-endpoint rate limits (requests per minute)",
+                    "properties": {
+                        "get_config": {
+                            "type": "integer",
+                            "description": "Rate limit for get_config endpoint",
+                            "minimum": 1,
+                            "default": 60
+                        },
+                        "ping": {
+                            "type": "integer",
+                            "description": "Rate limit for ping endpoint",
+                            "minimum": 1,
+                            "default": 120
+                        },
+                        "monitor": {
+                            "type": "integer",
+                            "description": "Rate limit for monitor endpoint",
+                            "minimum": 1,
+                            "default": 30
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        },
+        "admin": {
+            "type": "object",
+            "required": ["username", "password_hash"],
+            "properties": {
+                "username": {
+                    "type": "string",
+                    "description": "Admin username",
+                    "minLength": 1
+                },
+                "password_hash": {
+                    "type": "string",
+                    "description": "Admin password hash (PBKDF2 format)",
+                    "pattern": "^pbkdf2-sha256\\$[0-9]+\\$[0-9a-f]+\\$[0-9a-f]+$"
+                }
+            },
+            "additionalProperties": false
+        },
+        "logging": {
+            "type": "object",
+            "properties": {
+                "level": {
+                    "type": "string",
+                    "description": "Logging level",
+                    "enum": ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
+                    "default": "INFO"
+                },
+                "file": {
+                    "type": "string",
+                    "description": "Log file path",
+                    "default": "logs/lsl-server.log"
+                },
+                "max_size": {
+                    "type": "integer",
+                    "description": "Maximum log file size in bytes before rotation",
+                    "minimum": 1024,
+                    "default": 10485760
+                },
+                "backup_count": {
+                    "type": "integer",
+                    "description": "Number of rotated log files to keep",
+                    "minimum": 0,
+                    "default": 5
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}

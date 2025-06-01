@@ -1,0 +1,26 @@
+users:
+  admin:
+    uuid: 00000000-0000-4000-a000-000000000000
+    password_hash: pbkdf2-sha256$100000$aabbccddeeff$1234567890abcdef
+    allowed_containers:
+      - alpine
+      - ubuntu
+      - debian
+    metadata:
+      email: admin@example.com
+      role: administrator
+  user1:
+    uuid: 11111111-1111-4111-a111-111111111111
+    password_hash: pbkdf2-sha256$100000$bbccddeeff$234567890abcdef1
+    allowed_containers:
+      - alpine
+      - ubuntu
+    metadata:
+      email: user1@example.com
+  user2:
+    uuid: 22222222-2222-4222-a222-222222222222
+    password_hash: pbkdf2-sha256$100000$ccddeeffaa$34567890abcdef12
+    allowed_containers:
+      - debian
+    metadata:
+      email: user2@example.com

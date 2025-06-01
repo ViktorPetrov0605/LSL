@@ -1,0 +1,13 @@
+admin:
+  username: admin
+  password_hash: pbkdf2-sha256$100000$aabbccddeeff$1234567890abcdef
+server:
+  host: 127.0.0.1
+  port: 8000
+  rate_limits:
+    get_config: 60
+    ping: 120
+    monitor: 30
+logging:
+  level: INFO
+  file: logs/lsl-server.log

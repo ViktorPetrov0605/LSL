@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LSL Admin - Monitoring</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="admin-container">
+        {% include 'sidebar.html' %}
+        
+        <div class="content">
+            <div class="header">
+                <h1>Monitoring Dashboard</h1>
+                <div class="user-info">
+                    Logged in as: {{ username }} | <a href="/admin/logout">Logout</a>
+                </div>
+            </div>
+            
+            <div class="monitoring-section">
+                <h2>Server Statistics</h2>
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <h3>CPU Usage</h3>
+                        <div class="stat-value" id="cpu-usage">0%</div>
+                        <div class="progress-bar">
+                            <div class="progress" id="cpu-bar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <h3>Memory Usage</h3>
+                        <div class="stat-value" id="memory-usage">0%</div>
+                        <div class="progress-bar">
+                            <div class="progress" id="memory-bar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <h3>Disk Usage</h3>
+                        <div class="stat-value" id="disk-usage">0%</div>
+                        <div class="progress-bar">
+                            <div class="progress" id="disk-bar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="monitoring-section">
+                <h2>Client Status</h2>
+                <table class="data-table" id="client-table">
+                    <thead>
+                        <tr>
+                            <th>UUID</th>
+                            <th>Username</th>
+                            <th>Last Ping</th>
+                            <th>Status</th>
+                            <th>Running Containers</th>
+                        </tr>
+                    </thead>
+                    <tbody id="client-table-body">
+                        <tr>
+                            <td colspan="5" class="empty-table">No clients connected</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="monitoring-section">
+                <h2>Running Containers</h2>
+                <table class="data-table" id="container-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Image</th>
+                            <th>Owner</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="container-table-body">
+                        <tr>
+                            <td colspan="6" class="empty-table">No containers running</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <script src="/static/js/monitor.js"></script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Users Configuration Schema",
+    "description": "Schema for user entries in users.yaml",
+    "type": "object",
+    "required": ["users"],
+    "properties": {
+        "users": {
+            "type": "object",
+            "patternProperties": {
+                "^[a-zA-Z0-9_-]+$": {
+                    "type": "object",
+                    "required": ["uuid", "password_hash"],
+                    "properties": {
+                        "uuid": {
+                            "type": "string",
+                            "description": "User's unique identifier",
+                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                        },
+                        "password_hash": {
+                            "type": "string",
+                            "description": "Hashed password (PBKDF2 format)",
+                            "pattern": "^pbkdf2-sha256\\$[0-9]+\\$[0-9a-f]+\\$[0-9a-f]+$"
+                        },
+                        "allowed_containers": {
+                            "type": "array",
+                            "description": "List of container identifiers this user can access",
+                            "items": {
+                                "type": "string"
+                            },
+                            "default": []
+                        },
+                        "token": {
+                            "type": "string",
+                            "description": "API token for programmatic access",
+                            "pattern": "^[0-9a-f]{32,64}$"
+                        },
+                        "last_seen": {
+                            "type": "string",
+                            "description": "ISO8601 timestamp of last activity",
+                            "format": "date-time"
+                        },
+                        "metadata": {
+                            "type": "object",
+                            "description": "Additional user metadata",
+                            "properties": {
+                                "full_name": {
+                                    "type": "string"
+                                },
+                                "email": {
+                                    "type": "string",
+                                    "format": "email"
+                                },
+                                "role": {
+                                    "type": "string"
+                                },
+                                "notes": {
+                                    "type": "string"
+                                }
+                            },
+                            "additionalProperties": true
+                        },
+                        "resource_limits": {
+                            "type": "object",
+                            "description": "Resource limits for all user containers",
+                            "properties": {
+                                "max_containers": {
+                                    "type": "integer",
+                                    "description": "Maximum number of concurrent containers",
+                                    "minimum": 0
+                                },
+                                "cpu": {
+                                    "type": "string",
+                                    "description": "CPU limit (e.g., '1.0', '500m')",
+                                    "pattern": "^[0-9]+(\\.[0-9]+)?(m)?$"
+                                },
+                                "memory": {
+                                    "type": "string",
+                                    "description": "Memory limit (e.g., '1Gi', '512Mi')",
+                                    "pattern": "^[0-9]+(Ki|Mi|Gi|Ti)?$"
+                                }
+                            },
+                            "additionalProperties": false
+                        },
+                        "locked": {
+                            "type": "boolean",
+                            "description": "Whether the account is locked",
+                            "default": false
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}

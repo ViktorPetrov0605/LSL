@@ -44,18 +44,43 @@ Given the feedback received, I've broken down the project into smaller, manageab
 1. **Core Functionality (CLI):**
    - [x] Environment initialization (`lsl init`).
    - [x] Container creation, listing, start/stop (`lsl create`, `lsl list`, `lsl start/stop`).
-2. **Terminal User Interface (TUI):**
-   - [ ] Design and implement an intuitive TUI for enhanced user experience.
-3. **Collaboration Features:**
-   - [ ] Environment sharing and file synchronization.
-   - [ ] Access control mechanisms.
-4. **Additional Enhanecements:**
-   - [ ] Container orchestration using Docker.
-   - [ ] Secure authentication and efficient resource management.
+2. **Server Components:**
+   - [x] REST API for client interaction
+   - [x] YAML Configuration Management
+   - [x] Schema Validation
+   - [ ] Web Admin UI
+   - [ ] Monitoring Dashboard
+3. **Client Enhancements:**
+   - [ ] Client Configuration and UUID handling
+   - [ ] Background ping thread
+   - [ ] Enhanced container management
+4. **Collaboration Features:**
+   - [ ] Multi-user session integration
+   - [ ] Environment sharing and file synchronization
+   - [ ] Access control mechanisms
+5. **Additional Enhancements:**
+   - [ ] Container orchestration using Docker
+   - [x] Secure authentication and efficient resource management
+   - [ ] Packaging and distribution
 
 ## Realistic End Goal:
 
 The primary objective is to create a functional and user-friendly container management system that significantly improves the development workflow, especially in collaborative environments. By focusing on efficiency, speed, and ease of use, LSL will be a valuable tool for developers working on various projects.
+
+## Project Status
+
+The current implementation status is tracked in `STATUS.md`. Key components implemented so far:
+
+- Basic CLI tool for container management
+- YAML Configuration Management with schema validation
+- REST API server with endpoints for client interaction
+- Secure authentication using UUID tokens
+- Rate limiting and error handling
+
+Next priorities:
+1. Web Admin UI for user and container management
+2. Enhanced client implementation
+3. Monitoring Dashboard
 
 ## Feedback and Contribution
 
@@ -70,9 +95,32 @@ Comprehensive documentation for LSL is available in the `docs/` directory:
 
 ## Getting Started
 
-To begin using LSL, ensure you have Docker installed. Then, clone this repository and explore the documentation. You can list available containers using:
+To begin using LSL, ensure you have Docker installed. Then, clone this repository and explore the documentation.
+
+### CLI Usage
+
+You can list available containers using:
 ```bash
 lsl -l
+```
+
+### REST API Server
+
+The LSL project includes a REST API server for client interaction. To start the server:
+
+```bash
+cd LSL
+python -m server.run
+```
+
+The server provides the following endpoints:
+- `GET /get_config`: Get user-specific configuration
+- `POST /ping`: Update client's last seen timestamp
+- `GET /monitor`: Get system and container monitoring data
+
+You can use the demo script to test the API:
+```bash
+python -m server.demo_api --action all
 ```
 You can also start up this project's website with a lot more nicely-formatted information. You can run 
 ```bash
