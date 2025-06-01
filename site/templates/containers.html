@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LSL Admin - Containers</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="admin-container">
+        {% include 'sidebar.html' %}
+        
+        <div class="content">
+            <div class="header">
+                <h1>Container Management</h1>
+                <div class="user-info">
+                    Logged in as: {{ username }} | <a href="/admin/logout">Logout</a>
+                </div>
+            </div>
+            
+            <div class="action-bar">
+                <button id="add-container" class="btn btn-primary">Add Container</button>
+            </div>
+            
+            <div class="containers-list">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Image</th>
+                            <th>Shared</th>
+                            <th>Resources</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if containers %}
+                            {% for container in containers %}
+                            <tr>
+                                <td>{{ container.name }}</td>
+                                <td>{{ container.image }}</td>
+                                <td>{{ "Yes" if container.shared else "No" }}</td>
+                                <td>{{ container.resources }}</td>
+                                <td>
+                                    <button class="btn btn-small edit-container" data-name="{{ container.name }}">Edit</button>
+                                    <button class="btn btn-small btn-danger delete-container" data-name="{{ container.name }}">Delete</button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="5" class="empty-table">No containers found</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Container Form Modal -->
+    <div id="container-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modal-title">Add Container</h2>
+            <form id="container-form">
+                <div class="form-group">
+                    <label for="container-name">Name</label>
+                    <input type="text" id="container-name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="container-image">Image</label>
+                    <input type="text" id="container-image" name="image" required>
+                </div>
+                <div class="form-group">
+                    <label for="container-description">Description</label>
+                    <textarea id="container-description" name="description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="container-shared">Shared</label>
+                    <input type="checkbox" id="container-shared" name="shared">
+                </div>
+                <div class="form-group">
+                    <label for="container-volumes">Volumes</label>
+                    <textarea id="container-volumes" name="volumes" placeholder="host_path:container_path:mode&#10;/host/path:/container/path:rw"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="container-env">Environment Variables</label>
+                    <textarea id="container-env" name="env" placeholder="VAR1=value1&#10;VAR2=value2"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="container-memory">Memory Limit (MB)</label>
+                    <input type="number" id="container-memory" name="memory" min="32" step="32">
+                </div>
+                <div class="form-group">
+                    <label for="container-cpu">CPU Shares</label>
+                    <input type="number" id="container-cpu" name="cpu" min="0.1" step="0.1">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="/static/js/containers.js"></script>
+</body>
+</html>

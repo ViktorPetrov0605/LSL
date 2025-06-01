@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LSL Admin - Users</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="admin-container">
+        {% include 'sidebar.html' %}
+        
+        <div class="content">
+            <div class="header">
+                <h1>User Management</h1>
+                <div class="user-info">
+                    Logged in as: {{ username }} | <a href="/admin/logout">Logout</a>
+                </div>
+            </div>
+            
+            <div class="action-bar">
+                <button id="add-user" class="btn btn-primary">Add User</button>
+            </div>
+            
+            <div class="users-list">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>UUID</th>
+                            <th>Username</th>
+                            <th>Allowed Containers</th>
+                            <th>Last Seen</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if users %}
+                            {% for user in users %}
+                            <tr>
+                                <td>{{ user.uuid }}</td>
+                                <td>{{ user.username }}</td>
+                                <td>{{ user.allowed_containers|join(", ") }}</td>
+                                <td>{{ user.last_seen or "Never" }}</td>
+                                <td>
+                                    <button class="btn btn-small edit-user" data-uuid="{{ user.uuid }}">Edit</button>
+                                    <button class="btn btn-small btn-danger delete-user" data-uuid="{{ user.uuid }}">Delete</button>
+                                    <button class="btn btn-small reset-token" data-uuid="{{ user.uuid }}">Reset Token</button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="5" class="empty-table">No users found</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- User Form Modal -->
+    <div id="user-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modal-title">Add User</h2>
+            <form id="user-form">
+                <input type="hidden" id="user-uuid" name="uuid">
+                <div class="form-group">
+                    <label for="user-username">Username</label>
+                    <input type="text" id="user-username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="user-password">Password</label>
+                    <input type="password" id="user-password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="user-containers">Allowed Containers</label>
+                    <select id="user-containers" name="containers" multiple>
+                        <!-- Will be populated dynamically -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="/static/js/users.js"></script>
+</body>
+</html>

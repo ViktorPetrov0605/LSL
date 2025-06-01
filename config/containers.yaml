@@ -1,0 +1,25 @@
+containers:
+  alpine:
+    image: alpine:latest
+    shared: false
+    resources:
+      cpu: '0.5'
+      memory: 512Mi
+    env:
+      TERM: xterm
+  ubuntu:
+    image: ubuntu:22.04
+    shared: true
+    resources:
+      cpu: '1.0'
+      memory: 1Gi
+    env:
+      TERM: xterm
+  debian:
+    image: debian:stable-slim
+    shared: false
+    resources:
+      cpu: '0.75'
+      memory: 768Mi
+    env:
+      TERM: xterm

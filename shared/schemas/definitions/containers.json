@@ -1,0 +1,89 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Container Configuration Schema",
+    "description": "Schema for container template definitions in containers.yaml",
+    "type": "object",
+    "required": ["containers"],
+    "properties": {
+        "containers": {
+            "type": "object",
+            "patternProperties": {
+                "^[a-zA-Z0-9_-]+$": {
+                    "type": "object",
+                    "required": ["image"],
+                    "properties": {
+                        "image": {
+                            "type": "string",
+                            "description": "Docker image name",
+                            "minLength": 1
+                        },
+                        "shared": {
+                            "type": "boolean",
+                            "description": "Whether this container can be shared between users",
+                            "default": false
+                        },
+                        "resources": {
+                            "type": "object",
+                            "description": "Resource limits for the container",
+                            "properties": {
+                                "cpu": {
+                                    "type": "string",
+                                    "description": "CPU limit (e.g., '1.0', '500m')",
+                                    "pattern": "^[0-9]+(\\.[0-9]+)?(m)?$"
+                                },
+                                "memory": {
+                                    "type": "string",
+                                    "description": "Memory limit (e.g., '1Gi', '512Mi')",
+                                    "pattern": "^[0-9]+(Ki|Mi|Gi|Ti)?$"
+                                }
+                            }
+                        },
+                        "env": {
+                            "type": "object",
+                            "description": "Environment variables for the container",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        },
+                        "volumes": {
+                            "type": "array",
+                            "description": "Volume mounts for the container",
+                            "items": {
+                                "type": "object",
+                                "required": ["host_path", "container_path"],
+                                "properties": {
+                                    "host_path": {
+                                        "type": "string",
+                                        "description": "Path on the host"
+                                    },
+                                    "container_path": {
+                                        "type": "string",
+                                        "description": "Path in the container"
+                                    },
+                                    "read_only": {
+                                        "type": "boolean",
+                                        "description": "Mount as read-only",
+                                        "default": false
+                                    }
+                                }
+                            }
+                        },
+                        "network": {
+                            "type": "string",
+                            "description": "Network mode for the container",
+                            "enum": ["host", "bridge", "none"],
+                            "default": "bridge"
+                        },
+                        "command": {
+                            "type": ["string", "array"],
+                            "description": "Command to run in the container"
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}
