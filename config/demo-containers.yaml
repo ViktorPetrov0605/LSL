@@ -1,0 +1,38 @@
+containers:
+  dev_env:
+    image: "ubuntu:22.04"
+    resources:
+      memory: "512m"
+      cpu_shares: 1024
+    volumes:
+      - "~/lsl_data/dev_env:/data"
+    network: "host"
+    shared: false
+    env:
+      TZ: "UTC"
+      TERM: "xterm-256color"
+
+  web_server:
+    image: "nginx:alpine"
+    resources:
+      memory: "256m"
+      cpu_shares: 512
+    volumes:
+      - "~/lsl_data/web_server:/usr/share/nginx/html"
+    network: "bridge"
+    shared: true
+    env:
+      NGINX_PORT: "8080"
+
+  shared_terminal:
+    image: "ubuntu:22.04"
+    resources:
+      memory: "256m"
+      cpu_shares: 512
+    volumes:
+      - "~/lsl_data/shared_terminal:/shared"
+    network: "bridge"
+    shared: true
+    env:
+      TERM: "xterm-256color"
+      SESSION_NAME: "shared_session"
