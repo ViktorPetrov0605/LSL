@@ -2,10 +2,12 @@ containers:
   dev_env:
     image: "ubuntu:22.04"
     resources:
-      memory: "512m"
-      cpu_shares: 1024
+      memory: "512Mi"
+      cpu: "1.0"
     volumes:
-      - "~/lsl_data/dev_env:/data"
+      - host_path: "~/lsl_data/dev_env"
+        container_path: "/data"
+        read_only: false
     network: "host"
     shared: false
     env:
@@ -15,10 +17,12 @@ containers:
   web_server:
     image: "nginx:alpine"
     resources:
-      memory: "256m"
-      cpu_shares: 512
+      memory: "256Mi"
+      cpu: "0.5"
     volumes:
-      - "~/lsl_data/web_server:/usr/share/nginx/html"
+      - host_path: "~/lsl_data/web_server"
+        container_path: "/usr/share/nginx/html"
+        read_only: false
     network: "bridge"
     shared: true
     env:
@@ -27,10 +31,12 @@ containers:
   shared_terminal:
     image: "ubuntu:22.04"
     resources:
-      memory: "256m"
-      cpu_shares: 512
+      memory: "256Mi"
+      cpu: "0.5"
     volumes:
-      - "~/lsl_data/shared_terminal:/shared"
+      - host_path: "~/lsl_data/shared_terminal"
+        container_path: "/shared"
+        read_only: false
     network: "bridge"
     shared: true
     env:

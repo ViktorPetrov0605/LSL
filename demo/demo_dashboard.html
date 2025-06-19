@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LSL Demo Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f7fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        h1 {
+            margin: 0;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        
+        .status-active {
+            background-color: #2ecc71;
+        }
+        
+        .status-inactive {
+            background-color: #e74c3c;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        table th {
+            background-color: #f2f2f2;
+        }
+        
+        .resource-bar {
+            height: 20px;
+            background-color: #ecf0f1;
+            border-radius: 10px;
+            margin: 5px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .resource-value {
+            height: 100%;
+            background-color: #3498db;
+            border-radius: 10px;
+        }
+        
+        .terminal {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: "Courier New", monospace;
+            height: 250px;
+            overflow-y: auto;
+        }
+        
+        .terminal-line {
+            margin: 0;
+            padding: 2px 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-green {
+            background-color: #2ecc71;
+        }
+        
+        .btn-green:hover {
+            background-color: #27ae60;
+        }
+        
+        .btn-red {
+            background-color: #e74c3c;
+        }
+        
+        .btn-red:hover {
+            background-color: #c0392b;
+        }
+        
+        .btn-container {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>LSL Demo Dashboard</h1>
+        <p>Lightweight Subsystem for Linux</p>
+    </header>
+    
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h2>System Status</h2>
+                <div>
+                    <span class="status-indicator status-active"></span>
+                    <span id="system-status">Active</span>
+                </div>
+            </div>
+            
+            <div>
+                <p><strong>Server:</strong> <span id="server-address">http://localhost:8080</span></p>
+                <p><strong>Connected Clients:</strong> <span id="client-count">1</span></p>
+                <p><strong>Active Containers:</strong> <span id="container-count">2</span></p>
+                <p><strong>Uptime:</strong> <span id="uptime">00:15:32</span></p>
+            </div>
+        </div>
+        
+        <div class="dashboard-grid">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Active Containers</h2>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th>Network</th>
+                            <th>Image</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>dev_env</td>
+                            <td>Running</td>
+                            <td>Host</td>
+                            <td>ubuntu:22.04</td>
+                        </tr>
+                        <tr>
+                            <td>web_server</td>
+                            <td>Running</td>
+                            <td>Bridge</td>
+                            <td>nginx:alpine</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="btn-container">
+                    <button class="btn">Refresh List</button>
+                    <button class="btn btn-green">Start Container</button>
+                    <button class="btn btn-red">Stop Selected</button>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>Resource Usage</h2>
+                </div>
+                
+                <div>
+                    <h3>CPU Usage</h3>
+                    <div class="resource-bar">
+                        <div class="resource-value" style="width: 15%;"></div>
+                    </div>
+                    <p>15% used</p>
+                    
+                    <h3>Memory Usage</h3>
+                    <div class="resource-bar">
+                        <div class="resource-value" style="width: 33%;"></div>
+                    </div>
+                    <p>33% used</p>
+                    
+                    <h3>Disk Usage</h3>
+                    <div class="resource-bar">
+                        <div class="resource-value" style="width: 45%;"></div>
+                    </div>
+                    <p>45% used</p>
+                </div>
+            </div>
+            
+            <div class="card" style="grid-column: 1 / -1;">
+                <div class="card-header">
+                    <h2>Terminal Output</h2>
+                </div>
+                
+                <div class="terminal">
+                    <p class="terminal-line">$ lsl -n dev_env --net --persist</p>
+                    <p class="terminal-line">Starting container dev_env...</p>
+                    <p class="terminal-line">Using image: ubuntu:22.04</p>
+                    <p class="terminal-line">Mounting volume: /home/user/.lsl_persist_dev_env -> /data</p>
+                    <p class="terminal-line">Using host network</p>
+                    <p class="terminal-line">Container started successfully!</p>
+                    <p class="terminal-line">root@dev-env:/# </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Demo script to update some values dynamically
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update the uptime counter
+            let seconds = 932; // 15:32
+            setInterval(function() {
+                seconds++;
+                const hours = Math.floor(seconds / 3600);
+                const minutes = Math.floor((seconds % 3600) / 60);
+                const secs = seconds % 60;
+                
+                const timeString = 
+                    (hours > 0 ? String(hours).padStart(2, '0') + ':' : '') +
+                    String(minutes).padStart(2, '0') + ':' +
+                    String(secs).padStart(2, '0');
+                    
+                document.getElementById('uptime').textContent = timeString;
+            }, 1000);
+            
+            // Simulate resource usage changes
+            setInterval(function() {
+                const cpuUsage = Math.floor(Math.random() * 25) + 5;
+                const memUsage = Math.floor(Math.random() * 20) + 25;
+                
+                document.querySelector('.resource-value:nth-of-type(1)').style.width = cpuUsage + '%';
+                document.querySelector('p:nth-of-type(1)').textContent = cpuUsage + '% used';
+                
+                document.querySelector('.resource-value:nth-of-type(2)').style.width = memUsage + '%';
+                document.querySelector('p:nth-of-type(2)').textContent = memUsage + '% used';
+            }, 3000);
+            
+            // Add terminal lines occasionally
+            const terminalLines = [
+                "Container stats: CPU: 12.3%, MEM: 256MB",
+                "Syncing configuration with server...",
+                "Received update from server: 2 containers active",
+                "Checking network connectivity...",
+                "Network check successful: 5ms latency"
+            ];
+            
+            const terminal = document.querySelector('.terminal');
+            
+            setInterval(function() {
+                if (Math.random() > 0.7) {
+                    const lineElement = document.createElement('p');
+                    lineElement.className = 'terminal-line';
+                    lineElement.textContent = terminalLines[Math.floor(Math.random() * terminalLines.length)];
+                    terminal.appendChild(lineElement);
+                    
+                    // Auto-scroll to bottom
+                    terminal.scrollTop = terminal.scrollHeight;
+                }
+            }, 5000);
+        });
+    </script>
+</body>
+</html>

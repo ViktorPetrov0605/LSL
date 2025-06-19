@@ -1,0 +1,649 @@
+---
+timestamp: '2025-06-18T19:27:54.434836'
+level: INFO
+message: 'Created data directory: /home/falken/lsl_data/dev_env'
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:27:54.435432'
+level: INFO
+message: 'Created data directory: /home/falken/lsl_data/web_server'
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:27:54.436140'
+level: INFO
+message: 'Created data directory: /home/falken/lsl_data/shared_terminal'
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:27:54.441255'
+level: ERROR
+message: "Demo failed: Configuration file config/demo-containers.yaml failed validation:\
+  \ '~/lsl_data/web_server:/usr/share/nginx/html' is not of type 'object'\n\nFailed\
+  \ validating 'type' in schema['properties']['containers']['patternProperties']['^[a-zA-Z0-9_-]+$']['properties']['volumes']['items']:\n\
+  \    {'type': 'object',\n     'required': ['host_path', 'container_path'],\n   \
+  \  'properties': {'host_path': {'type': 'string',\n                            \
+  \      'description': 'Path on the host'},\n                    'container_path':\
+  \ {'type': 'string',\n                                       'description': 'Path\
+  \ in the '\n                                                      'container'},\n\
+  \                    'read_only': {'type': 'boolean',\n                        \
+  \          'description': 'Mount as read-only',\n                              \
+  \    'default': False}}}\n\nOn instance['containers']['web_server']['volumes'][0]:\n\
+  \    '~/lsl_data/web_server:/usr/share/nginx/html'"
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:29:45.334899'
+level: INFO
+message: 'Created data directory: /home/falken/lsl_data/dev_env'
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:29:45.335829'
+level: INFO
+message: 'Created data directory: /home/falken/lsl_data/web_server'
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:29:45.336517'
+level: INFO
+message: 'Created data directory: /home/falken/lsl_data/shared_terminal'
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:29:45.342803'
+level: ERROR
+message: "Demo failed: Configuration file config/demo-containers.yaml failed validation:\
+  \ Additional properties are not allowed ('network_mode' was unexpected)\n\nFailed\
+  \ validating 'additionalProperties' in schema['properties']['containers']['patternProperties']['^[a-zA-Z0-9_-]+$']:\n\
+  \    {'type': 'object',\n     'required': ['image'],\n     'properties': {'image':\
+  \ {'type': 'string',\n                              'description': 'Docker image\
+  \ name',\n                              'minLength': 1},\n                    'shared':\
+  \ {'type': 'boolean',\n                               'description': 'Whether this\
+  \ container can '\n                                              'be shared between\
+  \ users',\n                               'default': False},\n                 \
+  \   'resources': {'type': 'object',\n                                  'description':\
+  \ 'Resource limits for the '\n                                                 'container',\n\
+  \                                  'properties': {'cpu': {'type': 'string',\n  \
+  \                                                       'description': 'CPU '\n\
+  \                                                                        'limit\
+  \ '\n                                                                        '(e.g.,\
+  \ '\n                                                                        \"\
+  '1.0', \"\n                                                                    \
+  \    \"'500m')\",\n                                                         'pattern':\
+  \ '^[0-9]+(\\\\.[0-9]+)?(m)?$'},\n                                             \
+  \    'memory': {'type': 'string',\n                                            \
+  \                'description': 'Memory '\n                                    \
+  \                                       'limit '\n                             \
+  \                                              '(e.g., '\n                     \
+  \                                                      \"'1Gi', \"\n           \
+  \                                                                \"'512Mi')\",\n\
+  \                                                            'pattern': '^[0-9]+(Ki|Mi|Gi|Ti)?$'}}},\n\
+  \                    'env': {'type': 'object',\n                            'description':\
+  \ 'Environment variables for the '\n                                           'container',\n\
+  \                            'additionalProperties': {'type': 'string'}},\n    \
+  \                'volumes': {'type': 'array',\n                                'description':\
+  \ 'Volume mounts for the '\n                                               'container',\n\
+  \                                'items': {'type': 'object',\n                 \
+  \                         'required': ['host_path',\n                          \
+  \                             'container_path'],\n                             \
+  \             'properties': {'host_path': {'type': 'string',\n                 \
+  \                                                      'description': 'Path '\n\
+  \                                                                              \
+  \        'on '\n                                                               \
+  \                       'the '\n                                               \
+  \                                       'host'},\n                             \
+  \                            'container_path': {'type': 'string',\n            \
+  \                                                                'description':\
+  \ 'Path '\n                                                                    \
+  \                       'in '\n                                                \
+  \                                           'the '\n                           \
+  \                                                                'container'},\n\
+  \                                                         'read_only': {'type':\
+  \ 'boolean',\n                                                                 \
+  \      'description': 'Mount '\n                                               \
+  \                                       'as '\n                                \
+  \                                                      'read-only',\n          \
+  \                                                             'default': False}}}},\n\
+  \                    'network': {'type': 'string',\n                           \
+  \     'description': 'Network mode for the '\n                                 \
+  \              'container',\n                                'enum': ['host', 'bridge',\
+  \ 'none'],\n                                'default': 'bridge'},\n            \
+  \        'command': {'type': ['string', 'array'],\n                            \
+  \    'description': 'Command to run in the '\n                                 \
+  \              'container'}},\n     'additionalProperties': False}\n\nOn instance['containers']['web_server']:\n\
+  \    {'image': 'nginx:alpine',\n     'resources': {'memory': '256m', 'cpu_shares':\
+  \ 512},\n     'volumes': ['~/lsl_data/web_server:/usr/share/nginx/html'],\n    \
+  \ 'network_mode': 'bridge',\n     'shared': True,\n     'env': {'NGINX_PORT': '8080'}}"
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:30:08.230389'
+level: INFO
+message: 'Created data directory: /home/falken/lsl_data/dev_env'
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:30:08.231304'
+level: INFO
+message: 'Created data directory: /home/falken/lsl_data/web_server'
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:30:08.231977'
+level: INFO
+message: 'Created data directory: /home/falken/lsl_data/shared_terminal'
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:30:08.237949'
+level: ERROR
+message: "Demo failed: Configuration file config/demo-containers.yaml failed validation:\
+  \ Additional properties are not allowed ('network_mode' was unexpected)\n\nFailed\
+  \ validating 'additionalProperties' in schema['properties']['containers']['patternProperties']['^[a-zA-Z0-9_-]+$']:\n\
+  \    {'type': 'object',\n     'required': ['image'],\n     'properties': {'image':\
+  \ {'type': 'string',\n                              'description': 'Docker image\
+  \ name',\n                              'minLength': 1},\n                    'shared':\
+  \ {'type': 'boolean',\n                               'description': 'Whether this\
+  \ container can '\n                                              'be shared between\
+  \ users',\n                               'default': False},\n                 \
+  \   'resources': {'type': 'object',\n                                  'description':\
+  \ 'Resource limits for the '\n                                                 'container',\n\
+  \                                  'properties': {'cpu': {'type': 'string',\n  \
+  \                                                       'description': 'CPU '\n\
+  \                                                                        'limit\
+  \ '\n                                                                        '(e.g.,\
+  \ '\n                                                                        \"\
+  '1.0', \"\n                                                                    \
+  \    \"'500m')\",\n                                                         'pattern':\
+  \ '^[0-9]+(\\\\.[0-9]+)?(m)?$'},\n                                             \
+  \    'memory': {'type': 'string',\n                                            \
+  \                'description': 'Memory '\n                                    \
+  \                                       'limit '\n                             \
+  \                                              '(e.g., '\n                     \
+  \                                                      \"'1Gi', \"\n           \
+  \                                                                \"'512Mi')\",\n\
+  \                                                            'pattern': '^[0-9]+(Ki|Mi|Gi|Ti)?$'}}},\n\
+  \                    'env': {'type': 'object',\n                            'description':\
+  \ 'Environment variables for the '\n                                           'container',\n\
+  \                            'additionalProperties': {'type': 'string'}},\n    \
+  \                'volumes': {'type': 'array',\n                                'description':\
+  \ 'Volume mounts for the '\n                                               'container',\n\
+  \                                'items': {'type': 'object',\n                 \
+  \                         'required': ['host_path',\n                          \
+  \                             'container_path'],\n                             \
+  \             'properties': {'host_path': {'type': 'string',\n                 \
+  \                                                      'description': 'Path '\n\
+  \                                                                              \
+  \        'on '\n                                                               \
+  \                       'the '\n                                               \
+  \                                       'host'},\n                             \
+  \                            'container_path': {'type': 'string',\n            \
+  \                                                                'description':\
+  \ 'Path '\n                                                                    \
+  \                       'in '\n                                                \
+  \                                           'the '\n                           \
+  \                                                                'container'},\n\
+  \                                                         'read_only': {'type':\
+  \ 'boolean',\n                                                                 \
+  \      'description': 'Mount '\n                                               \
+  \                                       'as '\n                                \
+  \                                                      'read-only',\n          \
+  \                                                             'default': False}}}},\n\
+  \                    'network': {'type': 'string',\n                           \
+  \     'description': 'Network mode for the '\n                                 \
+  \              'container',\n                                'enum': ['host', 'bridge',\
+  \ 'none'],\n                                'default': 'bridge'},\n            \
+  \        'command': {'type': ['string', 'array'],\n                            \
+  \    'description': 'Command to run in the '\n                                 \
+  \              'container'}},\n     'additionalProperties': False}\n\nOn instance['containers']['web_server']:\n\
+  \    {'image': 'nginx:alpine',\n     'resources': {'memory': '256m', 'cpu_shares':\
+  \ 512},\n     'volumes': ['~/lsl_data/web_server:/usr/share/nginx/html'],\n    \
+  \ 'network_mode': 'bridge',\n     'shared': True,\n     'env': {'NGINX_PORT': '8080'}}"
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:30:54.583919'
+level: INFO
+message: 'Created data directory: /home/falken/lsl_data/dev_env'
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:30:54.584871'
+level: INFO
+message: 'Created data directory: /home/falken/lsl_data/web_server'
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:30:54.585593'
+level: INFO
+message: 'Created data directory: /home/falken/lsl_data/shared_terminal'
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:30:54.591287'
+level: INFO
+message: Loaded and validated demo configuration
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:30:54.601280'
+level: INFO
+message: Starting container 'dev_env' (host_network=True, persist=True)
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:30:54.607879'
+level: ERROR
+message: 'Failed to start container ''dev_env'': Container ''dev_env'' not found in
+  available containers'
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:32:12.404490'
+level: INFO
+message: 'Created data directory: /home/falken/lsl_data/dev_env'
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:32:12.405540'
+level: INFO
+message: 'Created data directory: /home/falken/lsl_data/web_server'
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:32:12.406242'
+level: INFO
+message: 'Created data directory: /home/falken/lsl_data/shared_terminal'
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:32:12.412184'
+level: INFO
+message: Loaded and validated demo configuration
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:32:12.421334'
+level: INFO
+message: Starting container 'dev_env' (host_network=True, persist=True)
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:32:12.428515'
+level: ERROR
+message: 'Failed to start container ''dev_env'': Container ''dev_env'' not found in
+  available containers'
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:34:11.745140'
+level: INFO
+message: 'Created data directory: /home/falken/lsl_data/dev_env'
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:34:11.746071'
+level: INFO
+message: 'Created data directory: /home/falken/lsl_data/web_server'
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:34:11.746746'
+level: INFO
+message: 'Created data directory: /home/falken/lsl_data/shared_terminal'
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:34:11.752219'
+level: INFO
+message: Loaded and validated demo configuration
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:34:11.761531'
+level: INFO
+message: Starting container 'dev_env' (host_network=True, persist=True)
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:34:11.768336'
+level: ERROR
+message: 'Failed to start container ''dev_env'': Container ''dev_env'' not found in
+  available containers'
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:43:24.406872'
+level: INFO
+message: 'Created data directory: /home/falken/lsl_data/dev_env'
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:43:24.407827'
+level: INFO
+message: 'Created data directory: /home/falken/lsl_data/web_server'
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:43:24.408512'
+level: INFO
+message: 'Created data directory: /home/falken/lsl_data/shared_terminal'
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:43:24.409139'
+level: INFO
+message: Set up demo environment
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:43:24.414663'
+level: INFO
+message: Loaded and validated demo configuration
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:43:24.423938'
+level: INFO
+message: Starting container 'dev_env' (host_network=True, persist=True)
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:43:24.430752'
+level: ERROR
+message: 'Failed to start container ''dev_env'': Container ''dev_env'' not found in
+  available containers'
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:43:48.339831'
+level: INFO
+message: 'Created data directory: /home/falken/lsl_data/dev_env'
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:43:48.340770'
+level: INFO
+message: 'Created data directory: /home/falken/lsl_data/web_server'
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:43:48.341457'
+level: INFO
+message: 'Created data directory: /home/falken/lsl_data/shared_terminal'
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:43:48.342092'
+level: INFO
+message: Set up demo environment
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:43:48.347774'
+level: INFO
+message: Loaded and validated demo configuration
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:43:48.356778'
+level: INFO
+message: Starting container 'dev_env' (host_network=True, persist=True)
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:43:48.363880'
+level: ERROR
+message: 'Failed to start container ''dev_env'': Container ''dev_env'' not found in
+  available containers'
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:44:01.884015'
+level: INFO
+message: 'Created data directory: /home/falken/lsl_data/dev_env'
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:44:01.885021'
+level: INFO
+message: 'Created data directory: /home/falken/lsl_data/web_server'
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:44:01.885726'
+level: INFO
+message: 'Created data directory: /home/falken/lsl_data/shared_terminal'
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:44:01.886388'
+level: INFO
+message: Set up demo environment
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:44:01.892160'
+level: INFO
+message: Loaded and validated demo configuration
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:44:01.901708'
+level: INFO
+message: Starting container 'dev_env' (host_network=True, persist=True)
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+
+---
+timestamp: '2025-06-18T19:44:01.909010'
+level: ERROR
+message: 'Failed to start container ''dev_env'': Container ''dev_env'' not found in
+  available containers'
+logger: demo_containers
+source:
+  file: yaml_logger.py
+  line: 100
+  function: _log
+

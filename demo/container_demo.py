@@ -11,6 +11,7 @@ import time
 from client.containers import ContainerManager
 from shared.config import load_yaml_config
 from shared.utils.yaml_logger import setup_logger
+import subprocess
 
 # Setup logging
 logger = setup_logger("demo_containers", "logs/demo.log")
@@ -45,16 +46,31 @@ def test_container_start(container_manager: ContainerManager, name: str,
         
     return success
 
+def run_host():
+    print("[DEMO] Starting shared session as host...")
+    subprocess.run(["python3", "lsl.py", "-n", "dev_env", "--host", "--share", "sharedSession1"])
+
+def run_client(port):
+    print(f"[DEMO] Joining shared session as client on port {port}...")
+    subprocess.run(["python3", "lsl.py", "--share", f"127.0.0.1:{port}"])
+
 def main():
     """Main demo function"""
     try:
         # Set up demo environment
         setup_demo_environment()
+        logger.info("Set up demo environment")
         
-        # Load and validate demo configuration
-        load_yaml_config("config/demo-containers.yaml", "containers")
-        logger.info("Loaded and validated demo configuration")
-        
+        try:
+            # Load and validate demo configuration
+            load_yaml_config("config/demo-containers.yaml", "containers")
+            logger.info("Loaded and validated demo configuration")
+        except Exception as e:
+            logger.error(f"Error loading configuration: {e}")
+            import traceback
+            traceback.print_exc()
+            sys.exit(1)
+            
         # Initialize container manager
         container_manager = ContainerManager()
         
@@ -74,8 +90,14 @@ def main():
         print("2. web_server: Nginx server with bridge networking")
         print("\nTest the containers using the commands in demo/README.md")
         
+        print("[DEMO] To run shared terminal session as host: python3 lsl.py -n dev_env --host --share sharedSession1")
+        print("[DEMO] To join shared terminal session as client: python3 lsl.py --share 127.0.0.1:<PORT>")
+        print("[DEMO] See README.md for more info.")
+        
     except Exception as e:
+        import traceback
         logger.error(f"Demo failed: {str(e)}")
+        traceback.print_exc()
         sys.exit(1)
 
 if __name__ == "__main__":

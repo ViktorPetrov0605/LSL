@@ -200,17 +200,20 @@ class ContainerManager:
             volumes = {}
             if container_config.get("volumes"):
                 for vol in container_config["volumes"]:
-                    # Parse volume string (host:container:mode)
-                    parts = vol.split(":")
-                    if len(parts) >= 2:
-                        host_path, container_path = parts[0], parts[1]
-                        # Expand user home directory if needed
-                        if host_path.startswith("~"):
-                            host_path = os.path.expanduser(host_path)
-                        # Create host directory if it doesn't exist
-                        if not os.path.exists(host_path):
-                            os.makedirs(host_path, exist_ok=True)
-                        volumes[host_path] = {'bind': container_path, 'mode': 'rw'}
+                    host_path = vol["host_path"]
+                    container_path = vol["container_path"]
+                    read_only = vol.get("read_only", False)
+                    
+                    # Expand user home directory if needed
+                    if host_path.startswith("~"):
+                        host_path = os.path.expanduser(host_path)
+                    # Create host directory if it doesn't exist
+                    if not os.path.exists(host_path):
+                        os.makedirs(host_path, exist_ok=True)
+                    volumes[host_path] = {
+                        'bind': container_path, 
+                        'mode': 'ro' if read_only else 'rw'
+                    }
             
             # Add persistent volume if requested
             if persist_data:
@@ -225,7 +228,24 @@ class ContainerManager:
             environment = container_config.get("env", {})
             
             # Resource limits
-            resource_limits = container_config.get("resources", {})
+            resources = container_config.get("resources", {})
+            
+            # Convert memory limit
+            mem_limit = None
+            if "memory" in resources:
+                mem_limit = resources["memory"]
+            
+            # Convert CPU limit
+            cpu_limit = None
+            if "cpu" in resources:
+                try:
+                    cpu_value = float(resources["cpu"].rstrip("m"))
+                    if "m" in resources["cpu"]:
+                        cpu_limit = int(cpu_value * 1024)  # Convert millicores to shares
+                    else:
+                        cpu_limit = int(cpu_value * 1024)  # Convert cores to shares
+                except (ValueError, AttributeError):
+                    logger.warning(f"Invalid CPU limit format: {resources.get('cpu')}")
             
             # Start container
             container = self.docker_client.containers.run(
@@ -235,7 +255,8 @@ class ContainerManager:
                 volumes=volumes,
                 network_mode=network_mode,
                 environment=environment,
-                **resource_limits  # memory, cpu_shares, etc.
+                mem_limit=mem_limit,
+                cpu_shares=cpu_limit
             )
             
             # Handle tmux/screen setup for shared containers
