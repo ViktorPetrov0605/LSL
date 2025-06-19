@@ -14,6 +14,7 @@ import time
 from datetime import datetime
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 import threading
+import mimetypes
 
 # Add project root to path for imports
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -40,10 +41,10 @@ class DemoRequestHandler(SimpleHTTPRequestHandler):
         if self.path == '/':
             self.path = '/demo_dashboard.html'
             return self.send_file_response()
-            
+        
         elif self.path == '/ping':
             self.send_json_response({"status": "ok", "server_time": time.time()})
-            
+        
         elif self.path == '/get_config':
             config = {
                 "server_version": "1.0.0-demo",
@@ -67,7 +68,7 @@ class DemoRequestHandler(SimpleHTTPRequestHandler):
                 }
             }
             self.send_json_response(config)
-            
+        
         elif self.path == '/api/status':
             uptime = int(time.time() - server_state["start_time"])
             status = {
@@ -78,7 +79,120 @@ class DemoRequestHandler(SimpleHTTPRequestHandler):
                 "requests_handled": server_state["requests_handled"]
             }
             self.send_json_response(status)
-            
+        
+        elif self.path == '/swagger.json':
+            # Serve OpenAPI spec
+            openapi_spec = {
+                "openapi": "3.0.0",
+                "info": {
+                    "title": "LSL Demo Server API",
+                    "version": "1.0.0-demo",
+                    "description": "API documentation for the LSL Demo Server."
+                },
+                "paths": {
+                    "/ping": {
+                        "get": {
+                            "summary": "Ping the server",
+                            "responses": {
+                                "200": {
+                                    "description": "Server is alive",
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {"type": "object"}
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "/get_config": {
+                        "get": {
+                            "summary": "Get server config",
+                            "responses": {
+                                "200": {
+                                    "description": "Config object",
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {"type": "object"}
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "/api/status": {
+                        "get": {
+                            "summary": "Get server status",
+                            "responses": {
+                                "200": {
+                                    "description": "Status object",
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {"type": "object"}
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "/register_container": {
+                        "post": {
+                            "summary": "Register a container",
+                            "requestBody": {
+                                "required": True,
+                                "content": {
+                                    "application/json": {
+                                        "schema": {"type": "object"}
+                                    }
+                                }
+                            },
+                            "responses": {
+                                "200": {
+                                    "description": "Container registered",
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {"type": "object"}
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "/status_update": {
+                        "post": {
+                            "summary": "Update client status",
+                            "requestBody": {
+                                "required": True,
+                                "content": {
+                                    "application/json": {
+                                        "schema": {"type": "object"}
+                                    }
+                                }
+                            },
+                            "responses": {
+                                "200": {
+                                    "description": "Status updated",
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {"type": "object"}
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            self.send_json_response(openapi_spec)
+        
+        elif self.path == '/docs':
+            # Serve Swagger UI HTML
+            self.send_response(200)
+            self.send_header('Content-Type', 'text/html')
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.end_headers()
+            self.wfile.write(self.swagger_ui_html().encode('utf-8'))
+        
         else:
             # Try to serve static files from the demo directory
             return self.send_file_response()
@@ -175,6 +289,37 @@ class DemoRequestHandler(SimpleHTTPRequestHandler):
                 {"error": f"File not found: {self.path}"}, 
                 status_code=404
             )
+    
+    def swagger_ui_html(self):
+        """Return a minimal Swagger UI HTML page"""
+        return '''
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>LSL Demo Server API Docs</title>
+            <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist/swagger-ui.css">
+        </head>
+        <body>
+        <div id="swagger-ui"></div>
+        <script src="https://unpkg.com/swagger-ui-dist/swagger-ui-bundle.js"></script>
+        <script>
+        window.onload = function() {
+            window.ui = SwaggerUIBundle({
+                url: '/swagger.json',
+                dom_id: '#swagger-ui',
+                presets: [
+                    SwaggerUIBundle.presets.apis,
+                    SwaggerUIBundle.SwaggerUIStandalonePreset
+                ],
+                layout: "BaseLayout",
+                deepLinking: true
+            });
+        };
+        </script>
+        </body>
+        </html>
+        '''
 
 def run_server(port: int):
     """Run the demo server on the specified port"""
