@@ -1,6 +1,7 @@
 # Example format: container_name = docker_repository:tag
-# Uncomment or add entries below:
+# Container mappings for demo:
 
-alpine = alpine:latest
-ubuntu = ubuntu:22.04
-# myapp = yourusername/yourimage:version
+dev_env = ubuntu:22.04
+web_server = nginx:alpine
+shared_terminal = ubuntu:22.04
+test_env = alpine:latest
